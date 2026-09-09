@@ -14,23 +14,20 @@ import {
   Title,
 } from '@mantine/core';
 import { BOOKS_PAGE_TITLE } from './constants';
-import { useGetBooksQuery } from './service';
 import { useAddToReadingListMutation } from '../reading-list/service';
-import { ReadingListPage } from '../reading-list/ReadingListPage';
+import type { Book } from './model';
 
-export function BooksPage() {
-  const { data: books, isLoading, isError } = useGetBooksQuery();
+interface BooksPageProps {
+  books: Book[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export function BooksPage({ books, isLoading, isError }: BooksPageProps) {
   const [addToReadingList, { isLoading: isAdding }] = useAddToReadingListMutation();
 
   return (
     <Container size="xl" py="xl">
-      <header className="site-header">
-        <Text className="brand">book<span>mymark</span></Text>
-        <Group gap="xs">
-          <Badge color="yellow" variant="filled">CATALOG</Badge>
-          <Text size="sm" c="dimmed">A personal library</Text>
-        </Group>
-      </header>
       <Stack gap="xs" mb="xl">
         <Text c="yellow" fw={700} tt="uppercase" size="sm">Browse the collection</Text>
         <Title className="hero-title">{BOOKS_PAGE_TITLE}</Title>
@@ -87,7 +84,6 @@ export function BooksPage() {
           </Grid.Col>
         ))}
       </Grid>
-      {books && <ReadingListPage books={books} />}
     </Container>
   );
 }

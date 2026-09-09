@@ -3,14 +3,14 @@ import { createRoot } from 'react-dom/client';
 import { MantineProvider, createTheme } from '@mantine/core';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import { BooksPage } from './pages/books/BooksPage';
+import { App } from './App';
 import '@mantine/core/styles.css';
 import './style.css';
 
 const theme = createTheme({
   primaryColor: 'yellow',
-  fontFamily: 'Inter, Arial, sans-serif',
-  headings: { fontFamily: 'Georgia, serif' },
+  fontFamily: "'DM Sans', ui-sans-serif, system-ui, sans-serif",
+  headings: { fontFamily: "'Playfair Display', Georgia, serif" },
   defaultRadius: 'sm',
 });
 
@@ -18,7 +18,7 @@ createRoot(document.getElementById('app')!).render(
   <StrictMode>
     <Provider store={store}>
       <MantineProvider theme={theme} defaultColorScheme="dark">
-        <BooksPage />
+        <App />
       </MantineProvider>
     </Provider>
   </StrictMode>,
