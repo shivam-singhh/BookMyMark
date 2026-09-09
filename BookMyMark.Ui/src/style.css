@@ -1,0 +1,68 @@
+:root {
+  font-family: Inter, Arial, sans-serif;
+  color: #f5f2e8;
+  background: #141414;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 80% 0%, rgba(255, 210, 75, 0.08), transparent 28rem),
+    #141414;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0 3.5rem;
+  border-bottom: 1px solid #363636;
+  margin-bottom: 4rem;
+}
+
+.brand {
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.brand span {
+  color: #ffd24b;
+}
+
+.hero-title {
+  max-width: 680px;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+.book-card {
+  background: #1c1c1c;
+  border-color: #363636;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.book-card:hover {
+  border-color: #ffd24b;
+  transform: translateY(-4px);
+}
+
+.book-card .mantine-Image-root {
+  background: #292929;
+}
+
+.shelf-card {
+  background: #1c1c1c;
+  border-color: #363636;
+}
