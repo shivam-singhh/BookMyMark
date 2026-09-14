@@ -17,7 +17,7 @@ builder.Services.AddDbContext<BookMyMarkDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Ui", policy =>
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
