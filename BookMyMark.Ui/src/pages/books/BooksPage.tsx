@@ -14,7 +14,10 @@ import {
   Title,
 } from '@mantine/core';
 import { BOOKS_PAGE_TITLE } from './constants';
-import { useAddToReadingListMutation } from '../reading-list/service';
+import {
+  useAddToReadingListMutation,
+  useGetReadingListQuery,
+} from '../reading-list/service';
 import type { Book } from './model';
 
 interface BooksPageProps {
@@ -24,7 +27,10 @@ interface BooksPageProps {
 }
 
 export function BooksPage({ books, isLoading, isError }: BooksPageProps) {
-  const [addToReadingList, { isLoading: isAdding }] = useAddToReadingListMutation();
+  const { data: readingList = [] } = useGetReadingListQuery(undefined);
+  const [addToReadingList, { isLoading: isAdding, isSuccess, isError: isAddError }] =
+    useAddToReadingListMutation();
+  const savedBookIds = new Set(readingList.map((item) => item.bookId));
 
   return (
     <Container size="xl" py="xl">
@@ -37,6 +43,18 @@ export function BooksPage({ books, isLoading, isError }: BooksPageProps) {
       {isError && (
         <Alert color="red" title="Unable to load books" mb="xl">
           Make sure the ASP.NET API is running on http://localhost:5087.
+        </Alert>
+      )}
+
+      {isSuccess && (
+        <Alert color="teal" title="Added to your shelf" mb="xl">
+          Open <strong>My shelves</strong> to see your reading list.
+        </Alert>
+      )}
+
+      {isAddError && (
+        <Alert color="red" title="Could not add this book" mb="xl">
+          The request reached the API, but the book was not saved. Please try again.
         </Alert>
       )}
 
@@ -73,10 +91,11 @@ export function BooksPage({ books, isLoading, isError }: BooksPageProps) {
                     size="xs"
                     color="yellow"
                     variant="light"
-                    loading={isAdding}
+                    loading={isAdding && !savedBookIds.has(book.id)}
+                    disabled={savedBookIds.has(book.id)}
                     onClick={() => addToReadingList({ bookId: book.id })}
                   >
-                    + Add to shelf
+                    {savedBookIds.has(book.id) ? '✓ On your shelf' : '+ Add to shelf'}
                   </Button>
                 </Group>
               </Stack>
