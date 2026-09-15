@@ -34,16 +34,18 @@ BookMyMark/
 
 ### API
 
-The API uses a controller-service-data layering approach:
+The API uses a controller-service-repository-data layering approach:
 
 1. **Controllers** receive HTTP requests, bind input, and return HTTP responses.
-2. **Services** contain business rules and hide implementation details from controllers.
-3. **EF Core DbContext** translates LINQ queries into SQLite operations.
-4. **SQLite** stores user reading-list records.
+2. **Services** contain business rules and coordinate application operations.
+3. **Repositories** abstract persistence operations from the services.
+4. **EF Core DbContext** translates repository queries into SQLite operations.
+5. **SQLite** stores user reading-list records.
 
 Services are registered through ASP.NET Core dependency injection in `Program.cs`.
 The catalog service is registered as a singleton because it reads static JSON data,
-while the reading-list service is scoped because it uses a scoped EF Core context.
+while the reading-list repository and service are scoped because they use a scoped
+EF Core context.
 
 ### Data design
 

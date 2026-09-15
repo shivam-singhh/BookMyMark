@@ -1,36 +1,24 @@
-using BookMyMark.Api.Data;
 using BookMyMark.Api.Models;
-using Microsoft.EntityFrameworkCore;
+using BookMyMark.Api.Repositories;
 
 namespace BookMyMark.Api.Services;
 
 public sealed class ReadingListService(
-    BookMyMarkDbContext dbContext,
+    IReadingListRepository readingListRepository,
     IBookService bookService) : IReadingListService
 {
     public async Task<IReadOnlyList<ReadingListItem>> GetAllAsync(
         ReadingStatus? status = null,
         CancellationToken cancellationToken = default)
     {
-        var query = dbContext.ReadingListItems.AsNoTracking();
-
-        if (status.HasValue)
-        {
-            query = query.Where(item => item.Status == status.Value);
-        }
-
-        return await query
-            .OrderByDescending(item => item.AddedAt)
-            .ToListAsync(cancellationToken);
+        return await readingListRepository.GetAllAsync(status, cancellationToken);
     }
 
     public Task<ReadingListItem?> GetByIdAsync(
         int id,
         CancellationToken cancellationToken = default)
     {
-        return dbContext.ReadingListItems
-            .AsNoTracking()
-            .FirstOrDefaultAsync(item => item.Id == id, cancellationToken);
+        return readingListRepository.GetByIdAsync(id, cancellationToken: cancellationToken);
     }
 
     public async Task<ReadingListItem> AddAsync(
@@ -43,9 +31,7 @@ public sealed class ReadingListService(
         }
 
         var item = new ReadingListItem { BookId = bookId };
-        dbContext.ReadingListItems.Add(item);
-        await dbContext.SaveChangesAsync(cancellationToken);
-        return item;
+        return await readingListRepository.AddAsync(item, cancellationToken);
     }
 
     public async Task<ReadingListItem?> UpdateStatusAsync(
@@ -53,8 +39,10 @@ public sealed class ReadingListService(
         ReadingStatus status,
         CancellationToken cancellationToken = default)
     {
-        var item = await dbContext.ReadingListItems
-            .FirstOrDefaultAsync(readingItem => readingItem.Id == id, cancellationToken);
+        var item = await readingListRepository.GetByIdAsync(
+            id,
+            trackChanges: true,
+            cancellationToken);
 
         if (item is null)
         {
@@ -63,7 +51,7 @@ public sealed class ReadingListService(
 
         item.Status = status;
         item.FinishedAt = status == ReadingStatus.Finished ? DateTime.UtcNow : null;
-        await dbContext.SaveChangesAsync(cancellationToken);
+        await readingListRepository.SaveChangesAsync(cancellationToken);
         return item;
     }
 
@@ -71,16 +59,6 @@ public sealed class ReadingListService(
         int id,
         CancellationToken cancellationToken = default)
     {
-        var item = await dbContext.ReadingListItems
-            .FirstOrDefaultAsync(readingItem => readingItem.Id == id, cancellationToken);
-
-        if (item is null)
-        {
-            return false;
-        }
-
-        dbContext.ReadingListItems.Remove(item);
-        await dbContext.SaveChangesAsync(cancellationToken);
-        return true;
+        return await readingListRepository.DeleteAsync(id, cancellationToken);
     }
 }
