@@ -1,5 +1,6 @@
 using BookMyMark.Api.Services;
 using BookMyMark.Api.Data;
+using BookMyMark.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers()
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddSingleton<IBookService, BookService>();
+builder.Services.AddScoped<IReadingListRepository, ReadingListRepository>();
 builder.Services.AddScoped<IReadingListService, ReadingListService>();
 builder.Services.AddDbContext<BookMyMarkDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookMyMark")));
