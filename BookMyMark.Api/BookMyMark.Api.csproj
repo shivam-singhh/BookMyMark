@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BookMyMark.AppService\BookMyMark.AppService.csproj" />
+    <ProjectReference Include="..\BookMyMark.Command\BookMyMark.Command.csproj" />
+    <ProjectReference Include="..\BookMyMark.DTO\BookMyMark.DTO.csproj" />
+    <ProjectReference Include="..\BookMyMark.Infrastructure\BookMyMark.Infrastructure.csproj" />
+    <ProjectReference Include="..\BookMyMark.Query\BookMyMark.Query.csproj" />
+    <ProjectReference Include="..\BookMyMark.Shared\BookMyMark.Shared.csproj" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>

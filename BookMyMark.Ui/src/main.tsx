@@ -8,10 +8,10 @@ import '@mantine/core/styles.css';
 import './style.css';
 
 const theme = createTheme({
-  primaryColor: 'yellow',
-  fontFamily: "'DM Sans', ui-sans-serif, system-ui, sans-serif",
-  headings: { fontFamily: "'Playfair Display', Georgia, serif" },
-  defaultRadius: 'sm',
+  primaryColor: 'blue',
+  fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'DM Sans', sans-serif",
+  headings: { fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'DM Sans', sans-serif" },
+  defaultRadius: 'md',
 });
 
 createRoot(document.getElementById('app')!).render(

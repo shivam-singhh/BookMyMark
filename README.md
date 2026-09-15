@@ -18,13 +18,19 @@ Entity Framework Core, SQLite, Swagger, and a React frontend consumer.
 BookMyMark/
 ├── BookMyMark.sln
 ├── BookMyMark.Api/
-│   ├── Controllers/       # HTTP endpoints and status-code decisions
-│   ├── Data/              # EF Core DbContext and SQLite database
-│   ├── Migrations/        # Versioned database schema
-│   ├── Models/            # API and domain models
-│   ├── Services/          # Business logic and data-access abstractions
+│   ├── Features/          # HTTP controllers grouped by feature
 │   └── Data/books.json    # Read-only catalog source
-└── BookMyMark.Ui/
+├── BookMyMark.AppService/ # Application services and use-case orchestration
+├── BookMyMark.Command/    # CQRS write commands and handlers
+├── BookMyMark.DTO/        # Request and response contracts
+├── BookMyMark.Infrastructure/
+│   ├── Data/              # EF Core DbContext
+│   ├── Migrations/        # Versioned database schema
+│   ├── Repositories/      # SQLite persistence
+│   └── Services/          # Catalog file access
+├── BookMyMark.Query/      # CQRS read queries and handlers
+└── BookMyMark.Shared/     # Domain models and shared types
+BookMyMark.Ui/
     └── src/
         ├── app/           # Redux store
         └── pages/         # Books and reading-list pages
@@ -34,15 +40,23 @@ BookMyMark/
 
 ### API
 
-The API uses a controller-service-repository-data layering approach:
+The API uses separate projects based on Clean Architecture and lightweight CQRS:
 
-1. **Controllers** receive HTTP requests, bind input, and return HTTP responses.
-2. **Services** contain business rules and coordinate application operations.
-3. **Repositories** abstract persistence operations from the services.
-4. **EF Core DbContext** translates repository queries into SQLite operations.
-5. **SQLite** stores user reading-list records.
+1. **API** exposes controllers, Swagger, middleware, and HTTP status-code decisions.
+2. **DTO** defines request contracts without exposing infrastructure types.
+3. **Query** contains read operations and query handlers.
+4. **Command** contains write operations and command handlers.
+5. **AppService** coordinates application use cases and business rules.
+6. **Infrastructure** contains EF Core, SQLite repositories, migrations, and catalog file access.
+7. **Shared** contains domain models and common types.
+8. **SQLite** stores user reading-list records.
 
-Services are registered through ASP.NET Core dependency injection in `Program.cs`.
+This is intentionally lightweight CQRS rather than a full framework-based CQRS
+implementation. Commands and queries are explicit classes with handlers, without
+adding a mediator dependency that would obscure the flow for this assessment.
+
+Handlers, application services, repositories, and the EF Core context are registered
+through ASP.NET Core dependency injection in `BookMyMark.Api/Program.cs`.
 The catalog service is registered as a singleton because it reads static JSON data,
 while the reading-list repository and service are scoped because they use a scoped
 EF Core context.
@@ -118,7 +132,7 @@ From the repository root:
 ```powershell
 dotnet restore .\BookMyMark.Api
 Set-Location .\BookMyMark.Api
-dotnet ef database update
+dotnet ef database update --project ..\BookMyMark.Infrastructure --startup-project .
 Set-Location ..
 Set-Location .\BookMyMark.Ui
 npm install
@@ -204,10 +218,10 @@ catalog and shelves stay synchronized.
 dotnet build .\BookMyMark.sln
 
 # Create a new migration after changing EF Core models
-dotnet ef migrations add MigrationName --project .\BookMyMark.Api
+dotnet ef migrations add MigrationName --project .\BookMyMark.Infrastructure --startup-project .\BookMyMark.Api
 
 # Apply migrations
-dotnet ef database update --project .\BookMyMark.Api
+dotnet ef database update --project .\BookMyMark.Infrastructure --startup-project .\BookMyMark.Api
 
 # Build the frontend for production
 Set-Location .\BookMyMark.Ui
