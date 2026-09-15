@@ -1,112 +1,119 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-  color: #f8f7f3;
-  background: #111210;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'DM Sans', sans-serif;
+  color: #f5f7fb;
+  background: #101214;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  background: #111210;
-}
-
+body { margin: 0; min-width: 320px; background: #101214; }
 button { font-family: inherit; }
-
 #app { min-height: 100vh; }
-
 .app-shell { display: flex; min-height: 100vh; }
 
 .sidebar {
-  width: 256px;
-  padding: 34px 20px 24px;
+  width: 244px;
   box-sizing: border-box;
-  border-right: 1px solid #292b27;
-  background: #171815;
+  padding: 30px 18px 22px;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
+  background: #17191c;
+  border-right: 1px solid #292d32;
 }
-
 .brand {
-  color: #fff;
-  font-family: Georgia, serif;
-  font-size: 1.7rem;
+  color: #f5f7fb;
+  font-size: 1.42rem;
   font-weight: 700;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.06em;
 }
-
-.brand span { color: #f7c948; }
-.sidebar-tagline { color: #8e9288; font-size: 0.78rem; line-height: 1.4; margin-top: 10px; max-width: 170px; }
-.main-nav { display: grid; gap: 8px; margin-top: 58px; }
-
+.brand span { color: #3478f6; }
+.sidebar-tagline { margin-top: 8px; color: #8993a6; font-size: .78rem; line-height: 1.45; }
+.main-nav { display: grid; gap: 6px; margin-top: 52px; }
 .nav-item {
   width: 100%;
+  height: 46px;
   justify-content: flex-start;
-  color: #979b92;
-  padding: 12px 13px;
-  height: auto;
-  border-radius: 9px;
+  padding: 0 12px;
+  border-radius: 12px;
+  color: #7f899c;
 }
-
-.nav-item:hover { color: #f8f7f3; background: #232520; }
-.nav-item.is-active { color: #f7c948; background: #2a2920; }
+.nav-item:hover { color: #62a0ff; background: #22272e; }
+.nav-item.is-active { color: #62a0ff; background: #202d42; font-weight: 700; }
 .nav-item .mantine-Button-label { width: 100%; display: flex; align-items: center; gap: 12px; }
 .nav-item .mantine-Badge-root { margin-left: auto; }
-.nav-icon { width: 19px; font-size: 1.3rem; line-height: 1; text-align: center; }
+.nav-icon { width: 19px; font-size: 1.25rem; line-height: 1; text-align: center; }
 .sidebar-footer { margin-top: auto; }
-.avatar { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; color: #25251e; background: #f7c948; font-weight: 800; }
-
+.avatar { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: #3478f6; font-weight: 700; }
 .main-content { width: 100%; min-width: 0; }
-.mobile-header { display: none; }
-.mobile-nav { display: none; }
+.mobile-header, .mobile-nav { display: none; }
 .page-container { max-width: 1180px; }
-.page-heading { padding: 44px 0 34px; }
-.eyebrow { color: #f7c948; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
-.page-title { margin-top: 10px; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.8rem, 6vw, 5.3rem); letter-spacing: -0.055em; line-height: 0.98; }
-.page-subtitle { max-width: 560px; margin-top: 18px; color: #969b90; font-size: 1.02rem; line-height: 1.65; }
-.shelf-summary { margin-bottom: 30px; padding: 22px 26px; background: linear-gradient(110deg, #21231d, #191b18); border-color: #383b32; }
-.stat-number { font-family: 'Playfair Display', Georgia, serif; font-size: 2rem; line-height: 1; color: #f7c948; }
-.stat-label { margin-top: 5px; color: #8e9288; font-size: 0.7rem; letter-spacing: 0.11em; text-transform: uppercase; }
-.shelves-grid { padding-top: 4px; padding-bottom: 60px; }
-.empty-state { margin-top: 22px; }
-.hero-title { max-width: 680px; font-size: clamp(2.7rem, 6vw, 5.2rem); line-height: 0.98; letter-spacing: -0.06em; }
-
+.page-heading { padding: 16px 0 28px; }
+.eyebrow { color: #3478f6; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.page-title, .hero-title { margin-top: 7px; color: #f5f7fb; font-size: clamp(2.2rem, 5vw, 3.6rem); letter-spacing: -.06em; line-height: 1.03; }
+.page-subtitle { max-width: 560px; margin-top: 10px; color: #9aa3af; font-size: .98rem; line-height: 1.55; }
+.book-grid { row-gap: 18px; }
 .book-card {
-  background: #1a1c18;
-  border-color: #30332d;
-  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  overflow: hidden;
+  background: #1a1d21;
+  border-color: #30353c;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .2);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
-.book-card .mantine-Title-root { font-family: 'Playfair Display', Georgia, serif; }
-.book-card:hover { border-color: #f7c948; transform: translateY(-5px); box-shadow: 0 14px 30px #0005; }
-.book-card .mantine-Image-root { background: #292c26; }
-.shelf-card { min-height: 150px; background: #1a1c18; border-color: #30332d; }
-.shelf-card .mantine-Title-root { font-family: 'Playfair Display', Georgia, serif; }
+.book-card:hover { border-color: #4d78b8; transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0, 0, 0, .32); }
+.book-card .mantine-Image-root { background: #252a30; }
+.book-card .mantine-Image-root img { object-fit: cover; }
+.book-title { color: #f1f3f5; font-size: 1rem; line-height: 1.25; }
+.book-card .mantine-Badge-root { max-width: 90px; overflow: hidden; }
+.shelf-summary { margin-bottom: 24px; background: #1a1d21; border-color: #30353c; box-shadow: 0 8px 22px rgba(0, 0, 0, .2); }
+.stat-number { color: #62a0ff; font-size: 1.8rem; font-weight: 700; line-height: 1; }
+.stat-label { margin-top: 6px; color: #9aa3af; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+.shelves-grid { padding-top: 4px; padding-bottom: 60px; }
+.shelf-card { min-height: 150px; background: #1a1d21; border-color: #30353c; box-shadow: 0 8px 22px rgba(0, 0, 0, .2); }
+.shelf-card .mantine-Image-root { flex-shrink: 0; background: #252a30; }
+.empty-state { margin-top: 22px; }
 
 @media (max-width: 700px) {
-  .app-shell { display: block; padding-bottom: 76px; }
+  .app-shell { display: block; padding-bottom: 82px; }
   .sidebar { display: none; }
-  .mobile-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 18px 0; }
-  .mobile-header .brand { font-size: 1.4rem; }
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 18px 0;
+  }
+  .mobile-header .brand { font-size: 1.25rem; }
   .mobile-nav {
     position: fixed;
     z-index: 10;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
     display: flex;
     justify-content: space-around;
-    padding: 8px 18px calc(8px + env(safe-area-inset-bottom));
-    background: #171815ee;
-    border-top: 1px solid #30332d;
-    backdrop-filter: blur(16px);
+    padding: 7px 14px calc(7px + env(safe-area-inset-bottom));
+    background: rgba(28, 31, 35, .92);
+    border: 1px solid #343a43;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+    backdrop-filter: blur(18px);
   }
-  .mobile-nav-item { color: #8e9288; height: auto; padding: 5px 22px; }
-  .mobile-nav-item .mantine-Button-label { display: grid; gap: 3px; justify-items: center; font-size: 0.7rem; }
-  .mobile-nav-item.is-active { color: #f7c948; }
-  .mobile-nav-item .nav-icon { font-size: 1.2rem; }
+  .mobile-nav-item { height: auto; padding: 5px 26px; color: #8d96a8; }
+  .mobile-nav-item .mantine-Button-label { display: grid; gap: 3px; justify-items: center; font-size: .68rem; }
+  .mobile-nav-item.is-active { color: #3478f6; }
+  .mobile-nav-item .nav-icon { font-size: 1.15rem; }
+  .page-container { padding-right: 16px; padding-left: 16px; }
+  .page-heading { padding-top: 10px; padding-bottom: 20px; }
+  .page-title { font-size: 2.35rem; }
+  .book-grid .mantine-Grid-col { padding: 5px; }
+  .book-card { padding: 7px; }
+  .book-card .mantine-Image-root { height: 190px !important; }
+  .book-card .mantine-Stack-root { margin-top: 9px; }
+  .book-title { font-size: .86rem; }
+  .book-card .mantine-Text-root { font-size: .72rem; }
+  .book-card .mantine-Button-root { padding-right: 9px; padding-left: 9px; }
+  .shelf-summary { padding: 16px; }
 }

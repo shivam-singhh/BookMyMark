@@ -1,21 +1,36 @@
-using BookMyMark.Api.Services;
-using BookMyMark.Api.Data;
-using BookMyMark.Api.Repositories;
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using BookMyMark.AppService.Interfaces;
+using BookMyMark.AppService.Services;
+using BookMyMark.Command.ReadingList;
+using BookMyMark.Infrastructure.Data;
+using BookMyMark.Infrastructure.Repositories;
+using BookMyMark.Infrastructure.Services;
+using BookMyMark.Query.Books;
+using BookMyMark.Query.ReadingList;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-builder.Services.AddSingleton<IBookService, BookService>();
+
+builder.Services.AddSingleton<IBookCatalogService, BookCatalogService>();
+builder.Services.AddSingleton<IBookAppService, BookAppService>();
 builder.Services.AddScoped<IReadingListRepository, ReadingListRepository>();
-builder.Services.AddScoped<IReadingListService, ReadingListService>();
+builder.Services.AddScoped<IReadingListAppService, ReadingListAppService>();
+
+builder.Services.AddScoped<GetBooksQueryHandler>();
+builder.Services.AddScoped<GetBookByIdQueryHandler>();
+builder.Services.AddScoped<GetReadingListQueryHandler>();
+builder.Services.AddScoped<GetReadingListItemQueryHandler>();
+builder.Services.AddScoped<AddReadingListItemCommandHandler>();
+builder.Services.AddScoped<UpdateReadingStatusCommandHandler>();
+builder.Services.AddScoped<DeleteReadingListItemCommandHandler>();
+
 builder.Services.AddDbContext<BookMyMarkDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BookMyMark")));
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Ui", policy =>
@@ -23,13 +38,12 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -37,11 +51,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("Ui");
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -5,6 +5,18 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.Api", "BookMyMark.Api\BookMyMark.Api.csproj", "{96EF898C-8F66-43B1-BC6C-94E0EF0C7803}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.Shared", "BookMyMark.Shared\BookMyMark.Shared.csproj", "{CC7D683E-026E-46E9-99D6-2EE4F4C6DEF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.DTO", "BookMyMark.DTO\BookMyMark.DTO.csproj", "{44DEEBAE-DE88-48A9-9531-7B1C51BE1823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.Infrastructure", "BookMyMark.Infrastructure\BookMyMark.Infrastructure.csproj", "{2F423C1E-4DD2-4634-A9A3-9E9F20B1892B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.AppService", "BookMyMark.AppService\BookMyMark.AppService.csproj", "{4550E34C-2D70-4906-A6C9-20251F839A64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.Command", "BookMyMark.Command\BookMyMark.Command.csproj", "{AA602373-6BBF-4B53-A101-ECE259D7E86F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyMark.Query", "BookMyMark.Query\BookMyMark.Query.csproj", "{A9D175A0-FF1A-45AC-A8A2-F602BB39B5DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +30,29 @@ Global
 		{96EF898C-8F66-43B1-BC6C-94E0EF0C7803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96EF898C-8F66-43B1-BC6C-94E0EF0C7803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96EF898C-8F66-43B1-BC6C-94E0EF0C7803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC7D683E-026E-46E9-99D6-2EE4F4C6DEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC7D683E-026E-46E9-99D6-2EE4F4C6DEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC7D683E-026E-46E9-99D6-2EE4F4C6DEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC7D683E-026E-46E9-99D6-2EE4F4C6DEF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44DEEBAE-DE88-48A9-9531-7B1C51BE1823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44DEEBAE-DE88-48A9-9531-7B1C51BE1823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44DEEBAE-DE88-48A9-9531-7B1C51BE1823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44DEEBAE-DE88-48A9-9531-7B1C51BE1823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F423C1E-4DD2-4634-A9A3-9E9F20B1892B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F423C1E-4DD2-4634-A9A3-9E9F20B1892B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F423C1E-4DD2-4634-A9A3-9E9F20B1892B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F423C1E-4DD2-4634-A9A3-9E9F20B1892B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4550E34C-2D70-4906-A6C9-20251F839A64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4550E34C-2D70-4906-A6C9-20251F839A64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4550E34C-2D70-4906-A6C9-20251F839A64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4550E34C-2D70-4906-A6C9-20251F839A64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA602373-6BBF-4B53-A101-ECE259D7E86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA602373-6BBF-4B53-A101-ECE259D7E86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA602373-6BBF-4B53-A101-ECE259D7E86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA602373-6BBF-4B53-A101-ECE259D7E86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9D175A0-FF1A-45AC-A8A2-F602BB39B5DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D175A0-FF1A-45AC-A8A2-F602BB39B5DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D175A0-FF1A-45AC-A8A2-F602BB39B5DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D175A0-FF1A-45AC-A8A2-F602BB39B5DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -15,7 +15,7 @@ export function App() {
       <aside className="sidebar">
         <div>
           <Text className="brand">book<span>mymark</span></Text>
-          <Text className="sidebar-tagline">A quiet place for your reading life.</Text>
+          <Text className="sidebar-tagline">Your personal reading space.</Text>
         </div>
 
         <nav className="main-nav" aria-label="Main navigation">
@@ -24,7 +24,7 @@ export function App() {
             variant="subtle"
             onClick={() => setView('discover')}
           >
-            <span className="nav-icon">⌕</span>
+            <span className="nav-icon">⌂</span>
             <span>Discover</span>
           </Button>
           <Button
@@ -32,9 +32,9 @@ export function App() {
             variant="subtle"
             onClick={() => setView('shelves')}
           >
-            <span className="nav-icon">▤</span>
+            <span className="nav-icon">▥</span>
             <span>My shelves</span>
-            <Badge size="sm" variant="light" color="yellow">Library</Badge>
+            <Badge size="sm" variant="light" color="blue">Library</Badge>
           </Button>
         </nav>
 
@@ -53,7 +53,7 @@ export function App() {
       <main className="main-content">
         <header className="mobile-header">
           <Text className="brand">book<span>mymark</span></Text>
-          <Badge color="yellow" variant="light">LIBRARY</Badge>
+          <Badge color="blue" variant="light">LIBRARY</Badge>
         </header>
         {view === 'discover' ? (
           <BooksPage books={books} isLoading={isLoading} isError={isError} />
@@ -67,7 +67,7 @@ export function App() {
           className={view === 'discover' ? 'mobile-nav-item is-active' : 'mobile-nav-item'}
           onClick={() => setView('discover')}
         >
-          <span className="nav-icon">⌕</span>
+          <span className="nav-icon">⌂</span>
           <span>Discover</span>
         </Button>
         <Button
@@ -75,7 +75,7 @@ export function App() {
           className={view === 'shelves' ? 'mobile-nav-item is-active' : 'mobile-nav-item'}
           onClick={() => setView('shelves')}
         >
-          <span className="nav-icon">▤</span>
+          <span className="nav-icon">▥</span>
           <span>My shelves</span>
         </Button>
       </nav>

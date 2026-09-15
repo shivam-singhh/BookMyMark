@@ -35,12 +35,12 @@ export function ReadingListPage({ books }: ReadingListPageProps) {
   return (
     <Container size="xl" py="xl" className="page-container">
       <Stack gap={0} className="page-heading">
-        <Text className="eyebrow">Your personal archive</Text>
+        <Text className="eyebrow">Your library</Text>
         <Title className="page-title">{READING_LIST_TITLE}</Title>
-        <Text className="page-subtitle">A record of the stories you are living with now, and the ones you have carried with you.</Text>
+        <Text className="page-subtitle">Everything you want to read, all in one calm place.</Text>
       </Stack>
 
-      <Card className="shelf-summary" withBorder>
+      <Card className="shelf-summary" withBorder radius="lg">
         <Group justify="space-between" align="center" wrap="wrap" gap="lg">
           <Group gap="xl">
             <div><Text className="stat-number">{items.length}</Text><Text className="stat-label">saved</Text></div>
@@ -51,13 +51,13 @@ export function ReadingListPage({ books }: ReadingListPageProps) {
             value={shelf}
             onChange={(value) => setShelf(value as 'All' | 'Reading' | 'Finished')}
             data={['All', 'Reading', 'Finished']}
-            color="yellow"
+            color="blue"
           />
         </Group>
       </Card>
 
       {!isLoading && items.length === 0 && (
-        <Alert className="empty-state" color="yellow" title="Your shelves are empty">
+        <Alert className="empty-state" color="blue" title="Your shelves are empty">
           Add a book from the catalog to start tracking your reading.
         </Alert>
       )}
@@ -69,18 +69,18 @@ export function ReadingListPage({ books }: ReadingListPageProps) {
 
           const isFinished = item.status === READING_STATUS.finished;
           return (
-            <Card key={item.id} withBorder radius="md" padding="lg" className="shelf-card">
+            <Card key={item.id} withBorder radius="lg" padding="md" className="shelf-card">
               <Group wrap="nowrap" align="flex-start">
                 <Image src={book.coverImageUrl} w={80} h={115} radius="xs" alt={book.title} />
                 <Stack gap={4} style={{ flex: 1 }}>
-                  <Title order={4} lineClamp={2}>{book.title}</Title>
+                  <Title order={4} lineClamp={2} className="book-title">{book.title}</Title>
                   <Text size="sm" c="dimmed">{book.author}</Text>
                   <Badge color={isFinished ? 'teal' : 'orange'} w="fit-content">
                     {item.status}
                   </Badge>
                   <Group gap="xs" mt="xs">
                     {!isFinished && (
-                      <Button size="xs" variant="light" onClick={() => updateStatus({
+                      <Button size="xs" color="blue" variant="light" onClick={() => updateStatus({
                         id: item.id,
                         body: { status: READING_STATUS.finished },
                       })}>
